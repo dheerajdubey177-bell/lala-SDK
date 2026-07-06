@@ -1,0 +1,14 @@
+lala.start:
+    lala.text naam = "Antigravity"
+    lala.print("Testing Lala SDK Compiler...")
+    lala.print("Welcome, " + naam)
+    
+    lala.number num1 = 10
+    lala.number num2 = 20
+    
+    lala.agar num2 > num1:
+        lala.print("Condition works!")
+    lala.warna:
+        lala.print("Condition failed!")
+    
+    lala.banau_window(800, 600, "My Game")

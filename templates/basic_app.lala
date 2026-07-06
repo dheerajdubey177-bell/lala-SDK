@@ -1,0 +1,11 @@
+lala.start:
+    lala.text naam = "Developer"
+    lala.print("Welcome to Lala SDK, " + naam)
+    
+    lala.number points = 100
+    lala.print(points)
+
+    lala.agar points > 50:
+        lala.print("You have high points!")
+    lala.warna:
+        lala.print("You need more points.")

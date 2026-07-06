@@ -1,0 +1,13 @@
+# Compiled files
+*.exe
+!bin/*.exe
+_build.cpp
+
+# Python cache
+__pycache__/
+*.pyc
+
+# PyInstaller
+build/
+dist/
+*.spec

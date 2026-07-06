@@ -1,0 +1,14 @@
+lala.start:
+    lala.banau_window(800, 600, "My First Game in Lala!")
+    
+    lala.number circle_x = 400
+    lala.number circle_y = 300
+    lala.number radius = 50
+    
+    lala.khel_loop:
+        lala.shuru_drawing()
+        
+        lala.draw_circle(circle_x, circle_y, radius, BLUE)
+        lala.draw_text("Welcome to Raylib powered by Lala SDK!", 190, 200, 20, LIGHTGRAY)
+        
+        lala.khatam_drawing()
