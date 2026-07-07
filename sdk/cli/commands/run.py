@@ -15,17 +15,31 @@ class RunCommand(Command):
         return "Build and execute the current project"
 
     def execute(self, args: argparse.Namespace):
-        # We can just delegate to build, then execute
-        from sdk.cli.commands.build import COMMAND as build_cmd
-        build_cmd.execute(args)
-        
         cwd = Path.cwd()
-        project = ProjectParser.load(cwd)
-        exe_path = cwd / "build" / f"{project.package.name}.exe"
+        try:
+            project = ProjectParser.load(cwd)
+        except FileNotFoundError as e:
+            print(f"fatal: {e}")
+            sys.exit(1)
+            
+        print(f"Running {project.package.name} v{project.package.version}...")
         
-        if exe_path.exists():
-            subprocess.run([str(exe_path)])
-        else:
-            print("Cannot run (no executable generated).")
+        if not project.source_files:
+            print("No source files found.")
+            sys.exit(1)
+            
+        source = project.source_files[0].content
+        
+        from compiler.frontend.lexer import Lexer
+        from compiler.frontend.parser import Parser
+        from compiler.backend.interpreter import Interpreter
+        try:
+            tokens = Lexer(source).tokenize()
+            ast = Parser(tokens, "<memory>").parse()
+            res = Interpreter().evaluate(ast)
+            sys.exit(res if isinstance(res, int) else 0)
+        except Exception as e:
+            print(f"Runtime error: {e}")
+            sys.exit(1)
 
 COMMAND = RunCommand()

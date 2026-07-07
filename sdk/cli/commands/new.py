@@ -39,9 +39,8 @@ entry = "lala.main"
 """
         (project_dir / "lala.toml").write_text(toml_content)
         
-        main_content = """lala.kaam main() -> lala.number:
-    lala.print("Hello, Lala!")
-    lala.lautao 0
+        main_content = """lala.kaam main():
+    print("Hello, Lala!")
 """
         (project_dir / "src" / "main.lala").write_text(main_content)
         

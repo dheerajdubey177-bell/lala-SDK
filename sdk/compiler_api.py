@@ -11,10 +11,6 @@ class DiagnosticsCategory:
 class CompilerAPI:
     @staticmethod
     def compile(project: Project) -> Tuple[bool, Optional[bytes], List[str]]:
-        """
-        Compiles the project and returns (success, obj_bytes, diagnostics).
-        """
-        # For v1.0, we just compile the first file (main.lala)
         if not project.source_files:
             return False, None, ["No source files found."]
             

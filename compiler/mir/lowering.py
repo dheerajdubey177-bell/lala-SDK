@@ -104,7 +104,7 @@ class HIRLoweringPass:
         elif isinstance(instr, hir.IntrinsicCall):
             for i, arg in enumerate(instr.args):
                 self.builder.set_arg(i, self.val_map[arg.id])
-            v = self.builder.call(f"intrinsic_{instr.intrinsic}", MachineType.I64 if instr.target else None)
+            v = self.builder.call(f"intrinsic_{instr.intrinsic_id.name}", MachineType.I64 if instr.target else None)
             if instr.target and v:
                 self.val_map[instr.target.id] = v
                 
