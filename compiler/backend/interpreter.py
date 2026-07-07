@@ -9,6 +9,9 @@ _raylib = None
 class Color(ctypes.Structure):
     _fields_ = [("r", ctypes.c_ubyte), ("g", ctypes.c_ubyte), ("b", ctypes.c_ubyte), ("a", ctypes.c_ubyte)]
 
+class Texture2D(ctypes.Structure):
+    _fields_ = [("id", ctypes.c_uint), ("width", ctypes.c_int), ("height", ctypes.c_int), ("mipmaps", ctypes.c_int), ("format", ctypes.c_int)]
+
 def get_raylib():
     global _raylib
     if _raylib: return _raylib
@@ -36,6 +39,15 @@ def get_raylib():
     _raylib.WindowShouldClose.restype = ctypes.c_bool
     _raylib.ClearBackground.argtypes = [Color]
     _raylib.DrawText.argtypes = [ctypes.c_char_p, ctypes.c_int, ctypes.c_int, ctypes.c_int, Color]
+    
+    _raylib.LoadTexture.argtypes = [ctypes.c_char_p]
+    _raylib.LoadTexture.restype = Texture2D
+    _raylib.DrawTexture.argtypes = [Texture2D, ctypes.c_int, ctypes.c_int, Color]
+    _raylib.UnloadTexture.argtypes = [Texture2D]
+    
+    _raylib.IsKeyDown.argtypes = [ctypes.c_int]
+    _raylib.IsKeyDown.restype = ctypes.c_bool
+    
     return _raylib
 
 def _get_color(name):
@@ -45,6 +57,7 @@ def _get_color(name):
     if name == "lala.GREEN": return Color(0, 228, 48, 255)
     if name == "lala.BLUE": return Color(0, 121, 241, 255)
     if name == "lala.BLACK": return Color(0, 0, 0, 255)
+    if name == "lala.WHITE": return Color(255, 255, 255, 255)
     return Color(0,0,0,255)
 
 class ReturnException(Exception):
@@ -81,8 +94,8 @@ class Interpreter(Visitor):
             return self.globals[name]
         
         # Raylib Constants Fallback
-        if name in ["RAYWHITE", "DARKGRAY", "RED", "BLUE", "GREEN", "BLACK", 
-                    "lala.RAYWHITE", "lala.DARKGRAY", "lala.RED", "lala.BLUE", "lala.GREEN", "lala.BLACK"]:
+        if name in ["RAYWHITE", "DARKGRAY", "RED", "BLUE", "GREEN", "BLACK", "WHITE",
+                    "lala.RAYWHITE", "lala.DARKGRAY", "lala.RED", "lala.BLUE", "lala.GREEN", "lala.BLACK", "lala.WHITE"]:
             return name
             
         raise RuntimeError(f"Undefined variable '{name}'")
@@ -177,6 +190,18 @@ class Interpreter(Visitor):
                 return lambda: get_raylib().EndDrawing()
             elif prop == "window_band_karo":
                 return lambda: get_raylib().CloseWindow()
+            elif prop == "texture_laao":
+                return lambda p: get_raylib().LoadTexture(str(p).encode('utf-8'))
+            elif prop == "texture_banao":
+                return lambda tex, x, y, c: get_raylib().DrawTexture(tex, int(x), int(y), _get_color(c))
+            elif prop == "texture_hatao":
+                return lambda tex: get_raylib().UnloadTexture(tex)
+            elif prop == "key_dabi_hai":
+                return lambda key: get_raylib().IsKeyDown(int(key))
+            elif prop == "KEY_RIGHT": return 262
+            elif prop == "KEY_LEFT": return 263
+            elif prop == "KEY_DOWN": return 264
+            elif prop == "KEY_UP": return 265
                 
         return self._get_var(node.name)
         
