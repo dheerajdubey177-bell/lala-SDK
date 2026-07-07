@@ -1,0 +1,25 @@
+laao graphics
+
+kaam main():
+    graphics.window(800, 600)
+    
+    number x = 400
+    number y = 300
+    number dx = 5
+    number dy = 5
+    number radius = 20
+    
+    loop:
+        x = x + dx
+        y = y + dy
+        
+        agar x > 800 - radius or x < radius:
+            dx = dx * -1
+            
+        agar y > 600 - radius or y < radius:
+            dy = dy * -1
+            
+        graphics.begin_drawing()
+        graphics.clear_background(30, 30, 40)
+        graphics.circle(x, y, radius, 255, 100, 100)
+        graphics.end_drawing()

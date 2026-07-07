@@ -1,0 +1,32 @@
+
+
+lala.kaam lala.number main():
+    lala.graphics.window(800, 600, "Lala Bouncing Ball")
+    
+    lala.number x = 400
+    lala.number y = 300
+    lala.number dx = 5
+    lala.number dy = 5
+    lala.number radius = 20
+    
+    lala.khel_loop:
+        x = x + dx
+        y = y + dy
+        
+        lala.agar x > 800 - radius:
+            dx = dx * -1
+        lala.warna_agar x < radius:
+            dx = dx * -1
+            
+        lala.agar y > 600 - radius:
+            dy = dy * -1
+        lala.warna_agar y < radius:
+            dy = dy * -1
+            
+        lala.graphics.begin_drawing()
+        lala.graphics.clear_background(30, 30, 40)
+        lala.graphics.circle(x, y, radius, 255, 100, 100)
+        lala.graphics.end_drawing()
+        
+    lala.graphics.close_window()
+    lala.lautao 0

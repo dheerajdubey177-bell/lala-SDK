@@ -1,0 +1,6 @@
+lala.start:
+    lala.number points = 100
+    lala.text player_name = "Hero"
+    
+    lala.print("Player: " + player_name)
+    lala.print("Points: " + std::to_string(points))

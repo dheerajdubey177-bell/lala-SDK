@@ -1,0 +1,13 @@
+{
+  "name": "examples\\08_modules",
+  "version": "0.1.0",
+  "language": "0.5",
+  "compiler": ">=0.5.0",
+  "sdk": "0.5",
+  "entry": "src/main.lala",
+  "dependencies": {},
+  "build": {
+    "target": "cpp",
+    "optimization": "debug"
+  }
+}

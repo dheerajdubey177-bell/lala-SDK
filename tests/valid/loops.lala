@@ -1,0 +1,19 @@
+kaam main():
+    number limit = 100
+    
+    // For loop
+    har i in range(0, limit):
+        agar i % 2 == 0:
+            print(i)
+            
+    // While loop
+    number count = 0
+    jabtak count < 10:
+        count = count + 1
+        
+        agar count == 5:
+            agla
+        warna_agar count == 8:
+            roko
+            
+    print("Done looping")

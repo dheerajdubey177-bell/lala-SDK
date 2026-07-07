@@ -1,0 +1,12 @@
+lala.start:
+    lala.collections.suchi<int> my_scores
+    
+    lala.collections.jodo(my_scores, 100)
+    lala.collections.jodo(my_scores, 200)
+    lala.collections.jodo(my_scores, 50)
+    
+    lala.print("Before sorting, length: " + std::to_string(lala.collections.lambai(my_scores)))
+    
+    lala.collections.sort(my_scores)
+    
+    lala.print("Sorted successfully!")

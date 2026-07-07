@@ -1,0 +1,10 @@
+lala.kaam void say_hello(std::string name):
+    lala.print("Hello " + name + "!")
+
+lala.kaam int square(int x):
+    lala.lautao x * x
+
+lala.start:
+    say_hello("Lala User")
+    lala.number result = square(5)
+    lala.print("5 squared is " + std::to_string(result))

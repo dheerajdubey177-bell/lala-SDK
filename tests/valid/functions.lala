@@ -1,0 +1,12 @@
+kaam number add(number a, number b):
+    lautao a + b
+    
+kaam string greet(string name):
+    lautao "Hello " + name
+
+kaam main():
+    number sum = add(10, 20)
+    print(sum)
+    
+    string msg = greet("Dheeraj")
+    print(msg)

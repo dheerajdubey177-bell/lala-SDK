@@ -1,0 +1,19 @@
+laao file
+
+kaam read_config():
+    // The ? operator propagates the error if open fails
+    f = file.open("config.json") ?
+    lautao f.text
+
+kaam main():
+    // Explicit error handling
+    result data = read_config()
+    
+    agar data.ok:
+        print("Config: " + data.value)
+    warna:
+        print("Failed to read config: " + data.error)
+        
+    // Panic demonstration
+    agar data.error == "Disk failed":
+        panic("Cannot continue without disk")

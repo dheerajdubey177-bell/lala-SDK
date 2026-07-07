@@ -1,0 +1,10 @@
+lala.start:
+    lala.print("Counting up:")
+    lala.har i in range(5):
+        lala.print(std::to_string(i))
+    
+    lala.print("While loop:")
+    lala.number power = 10
+    lala.jab_tak power > 0:
+        lala.print(std::to_string(power))
+        power = power - 2

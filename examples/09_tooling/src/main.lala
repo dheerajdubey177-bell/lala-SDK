@@ -1,0 +1,7 @@
+laao math
+lala.kaam lala.number test(lala.number a):
+    lala.number x = 10
+    lala.number y = 20
+    lala.lautao y
+    lala.print("dead")
+

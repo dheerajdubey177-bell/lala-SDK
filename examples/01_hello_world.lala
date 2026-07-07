@@ -1,0 +1,3 @@
+lala.start:
+    lala.print("Hello, World!")
+    lala.print("Welcome to Lala SDK Core v0.2!")

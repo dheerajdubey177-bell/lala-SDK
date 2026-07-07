@@ -1,0 +1,5 @@
+lala.kaam lala.number test_func(lala.number x):
+    lala.number unused_var = 10
+    lala.number y = 20
+    lala.lautao y
+    lala.print("dead code")

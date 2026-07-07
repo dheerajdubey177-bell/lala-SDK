@@ -1,0 +1,11 @@
+class ErrorCodes:
+    # Lexer & Parser (2000s)
+    SYNTAX_ERROR = "L2001"
+    UNEXPECTED_TOKEN = "L2002"
+    INDENTATION_ERROR = "L2003"
+    
+    # Semantics (3000s)
+    UNKNOWN_VARIABLE = "L3001"
+    UNKNOWN_FUNCTION = "L3002"
+    ALREADY_DECLARED = "L3003"
+    TYPE_MISMATCH = "L3004"

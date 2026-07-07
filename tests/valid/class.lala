@@ -1,0 +1,27 @@
+swaroop Drawable:
+    kaam draw()
+
+varg Point:
+    number x
+    number y
+    
+    kaam draw():
+        print("Drawing point at " + x + ", " + y)
+        
+varg Circle:
+    Point center
+    number radius
+    
+    kaam draw():
+        print("Drawing circle at " + center.x + ", " + center.y + " with radius " + radius)
+
+kaam main():
+    Point p = Point()
+    p.x = 10
+    p.y = 20
+    
+    Circle c = Circle()
+    c.center = p
+    c.radius = 5
+    
+    c.draw()

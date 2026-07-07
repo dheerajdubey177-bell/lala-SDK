@@ -1,0 +1,31 @@
+lala.start:
+    lala.graphics.window(800, 600, "Bouncing Ball v0.2")
+    
+    lala.number x = 400
+    lala.number y = 300
+    lala.number speed_x = 5
+    lala.number speed_y = 5
+    
+    lala.khel_loop:
+        x = x + speed_x
+        y = y + speed_y
+        
+        lala.agar x > 800:
+            speed_x = -5
+        lala.agar x < 0:
+            speed_x = 5
+            
+        lala.agar y > 600:
+            speed_y = -5
+        lala.agar y < 0:
+            speed_y = 5
+            
+        lala.agar lala.input.button("SPACE"):
+            speed_x = lala.math.random(-10, 10)
+            speed_y = lala.math.random(-10, 10)
+            
+        lala.graphics.clear(RAYWHITE)
+        lala.graphics.circle(x, y, 30, RED)
+        lala.graphics.text("Press SPACE to randomise speed!", 10, 10, 20, DARKGRAY)
+        
+        lala.khatam_drawing()
