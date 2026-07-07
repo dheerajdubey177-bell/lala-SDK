@@ -30,7 +30,8 @@ xcopy /E /I /Y bin "%INSTALL_DIR%\bin" >nul 2>&1
 xcopy /E /I /Y core "%INSTALL_DIR%\core" >nul 2>&1
 xcopy /E /I /Y std "%INSTALL_DIR%\std" >nul 2>&1
 xcopy /E /I /Y templates "%INSTALL_DIR%\templates" >nul 2>&1
-xcopy /Y raylib.zip "%INSTALL_DIR%\" >nul 2>&1
+echo   - Extracting Raylib...
+tar -xf raylib.zip -C "%INSTALL_DIR%"
 
 :: 4. Add to System PATH
 echo [4/4] Adding Lala to your System PATH...

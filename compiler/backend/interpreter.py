@@ -1,6 +1,51 @@
 import sys
+import ctypes
+import os
 from compiler.ast.visitors import Visitor
 from compiler.ast import *
+
+_raylib = None
+
+class Color(ctypes.Structure):
+    _fields_ = [("r", ctypes.c_ubyte), ("g", ctypes.c_ubyte), ("b", ctypes.c_ubyte), ("a", ctypes.c_ubyte)]
+
+def get_raylib():
+    global _raylib
+    if _raylib: return _raylib
+    
+    paths = [
+        os.path.join(os.path.dirname(sys.executable), "..", "raylib-5.0_win64_mingw-w64", "lib", "raylib.dll"),
+        os.path.join(os.path.dirname(sys.executable), "raylib.dll"),
+        os.path.join(os.path.dirname(__file__), "..", "..", "raylib-5.0_win64_mingw-w64", "lib", "raylib.dll")
+    ]
+    
+    # Try finding raylib.dll in PATH or standard locations
+    for p in paths:
+        p = os.path.normpath(p)
+        if os.path.exists(p):
+            _raylib = ctypes.cdll.LoadLibrary(p)
+            break
+    
+    if not _raylib:
+        try:
+            _raylib = ctypes.cdll.LoadLibrary("raylib.dll")
+        except:
+            raise RuntimeError("raylib.dll not found! Please extract raylib.zip")
+
+    _raylib.InitWindow.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_char_p]
+    _raylib.WindowShouldClose.restype = ctypes.c_bool
+    _raylib.ClearBackground.argtypes = [Color]
+    _raylib.DrawText.argtypes = [ctypes.c_char_p, ctypes.c_int, ctypes.c_int, ctypes.c_int, Color]
+    return _raylib
+
+def _get_color(name):
+    if name == "lala.RAYWHITE": return Color(245, 245, 245, 255)
+    if name == "lala.DARKGRAY": return Color(80, 80, 80, 255)
+    if name == "lala.RED": return Color(230, 41, 55, 255)
+    if name == "lala.GREEN": return Color(0, 228, 48, 255)
+    if name == "lala.BLUE": return Color(0, 121, 241, 255)
+    if name == "lala.BLACK": return Color(0, 0, 0, 255)
+    return Color(0,0,0,255)
 
 class ReturnException(Exception):
     def __init__(self, value):
@@ -119,22 +164,19 @@ class Interpreter(Visitor):
             if prop == "print":
                 return print
             elif prop == "banau_window":
-                return lambda w,h,title: print(f"[RAYLIB STUB] banau_window({w}, {h}, '{title}')")
+                return lambda w,h,title: get_raylib().InitWindow(int(w), int(h), str(title).encode('utf-8'))
             elif prop == "window_khuli_hai":
-                if not hasattr(self, '_window_counter'):
-                    self._window_counter = 0
-                self._window_counter += 1
-                return lambda: self._window_counter < 5
+                return lambda: not get_raylib().WindowShouldClose()
             elif prop == "shuru_drawing":
-                return lambda: None
+                return lambda: get_raylib().BeginDrawing()
             elif prop == "background":
-                return lambda c: None
+                return lambda c: get_raylib().ClearBackground(_get_color(c))
             elif prop == "text_likho":
-                return lambda t,x,y,s,c: print(f"[RAYLIB STUB] Drawing text: {t}")
+                return lambda t,x,y,s,c: get_raylib().DrawText(str(t).encode('utf-8'), int(x), int(y), int(s), _get_color(c))
             elif prop == "khatam_drawing":
-                return lambda: None
+                return lambda: get_raylib().EndDrawing()
             elif prop == "window_band_karo":
-                return lambda: print("[RAYLIB STUB] window_band_karo()")
+                return lambda: get_raylib().CloseWindow()
                 
         return self._get_var(node.name)
         
