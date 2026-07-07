@@ -1,0 +1,19 @@
+{
+  "name": "Lala Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1E1E1E",
+    "editor.foreground": "#D4D4D4"
+  },
+  "tokenColors": [
+    {
+      "name": "Lala Namespace",
+      "scope": ["support.class.lala", "entity.name.namespace.lala"],
+      "settings": {
+        "foreground": "#4EC9B0",
+        "fontStyle": "bold"
+      }
+    }
+  ],
+  "semanticHighlighting": true
+}

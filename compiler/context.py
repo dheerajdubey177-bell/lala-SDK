@@ -1,19 +1,27 @@
-class CompilerContext:
-    def __init__(self):
-        # Configuration
-        self.source_code = ""
-        self.source_file = ""
-        self.options = {}
+from .semantics.symbols import Scope
+from .session import CompilerSession
 
-        # Pipeline data
-        self.tokens = []
+class CompilationContext:
+    def __init__(self, session: CompilerSession, file: str):
+        self.session = session
+        self.file = file
         self.ast = None
-        self.hir = None
-        self.lir = None
         
-        # Semantic data (Tables)
-        self.symbol_table = None
-        self.type_table = None
+        # Scopes and Symbols
+        self.global_scope = Scope(name="Global")
+        self.node_scopes = {}
+        self.resolved_symbols = {}
         
-        # Diagnostics
-        self.diagnostics = None # Will point to DiagnosticsReporter
+        # Types
+        self.node_types = {} # Maps AST Expression node IDs to their resolved Type objects
+        
+        # Bindings (to be collapsed into Bound AST)
+        self.bound_calls = {} # Maps AST node ID to IntrinsicID or RuntimeID
+
+    @property
+    def diagnostics(self):
+        return self.session.diagnostics
+        
+    @property
+    def type_registry(self):
+        return self.session.type_registry

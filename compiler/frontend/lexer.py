@@ -63,27 +63,27 @@ class Token:
 
 KEYWORDS = {
     # Types
-    "number", "string", "bool", "list", "dict",
+    "lala.number", "lala.string", "lala.bool", "lala.list", "lala.dict",
     
     # Control Flow
-    "agar", "warna_agar", "warna",
-    "jabtak", "loop", "har", "in",
-    "roko", "agla", "lautao",
+    "lala.agar", "lala.warna_agar", "lala.warna",
+    "lala.jabtak", "lala.loop", "lala.har", "lala.in",
+    "lala.roko", "lala.agla", "lala.lautao",
     
     # Declaration
-    "kaam", "varg", "swaroop",
+    "lala.kaam", "lala.varg", "lala.swaroop",
     
     # Modules
-    "laao", "bahar",
+    "lala.laao", "lala.bahar",
     
     # Error Handling (handled natively or by Result)
-    "panic", "result",
+    "lala.panic", "lala.result",
     
     # Logical Operators (if treated as keywords, though often they are operators)
-    "and", "or", "not",
+    "lala.and", "lala.or", "lala.not",
     
     # Reserved (Future)
-    "async", "await", "match", "enum", "trait"
+    "lala.async", "lala.await", "lala.match", "lala.enum", "lala.trait"
 }
 
 class LexerError(Exception):
@@ -177,7 +177,7 @@ class Lexer:
             ('FLOAT',       r'\d+\.\d+'),     # Float
             ('NUMBER',      r'\d+'),          # Integer
             ('STRING',      r'"[^"]*"'),      # String literal
-            ('ID_OR_KEY',   r'[A-Za-z_][A-Za-z0-9_]*'), # Identifiers or keywords
+            ('ID_OR_KEY',   r'lala\.[A-Za-z_][A-Za-z0-9_]*|[A-Za-z_][A-Za-z0-9_]*'), # Identifiers or keywords
             ('OP',          r'==|!=|<=|>=|<|>|\+|-|\*|/|%|=|!|\?'), # Operators
             ('PUNCT',       r'\(|\)|\[|\]|\{|\}|,|:|\.'),     # Punctuation
             ('SKIP',        r'[ \t]+'),       # Skip over spaces and tabs

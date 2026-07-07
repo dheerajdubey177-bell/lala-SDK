@@ -1,0 +1,26 @@
+{
+  "If Statement": {
+    "prefix": "agar",
+    "body": [
+      "lala.agar ${1:condition}:",
+      "\t$0"
+    ],
+    "description": "If statement"
+  },
+  "Main Function": {
+    "prefix": "kaam",
+    "body": [
+      "lala.kaam main() -> lala.number:",
+      "\t$0",
+      "\tlala.lautao 0"
+    ],
+    "description": "Lala main entrypoint"
+  },
+  "Print": {
+    "prefix": "print",
+    "body": [
+      "lala.print($1)"
+    ],
+    "description": "Print to standard output"
+  }
+}

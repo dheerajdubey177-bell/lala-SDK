@@ -1,0 +1,5 @@
+lala.kaam get_value():
+    lala.lautao 42
+
+lala.kaam main():
+    lala.lautao get_value()

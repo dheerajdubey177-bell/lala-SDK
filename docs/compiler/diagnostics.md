@@ -1,29 +1,31 @@
 # Diagnostics
 
-## Purpose
-The Diagnostics engine handles reporting of lexical, syntax, semantic, and structural errors to the user in a consistent format.
+Lala implements a robust diagnostic reporting system. Errors and warnings are categorized by numeric blocks.
 
-## Formats
-Diagnostics must present the error code, a clear message, line/column identifiers, and source code highlights.
+## Severities
+* **Error**: Compilation cannot proceed to code generation.
+* **Warning**: Compilation succeeds, but the compiler flags potentially dangerous or inefficient code.
+* **Info**: Helpful suggestions (not fully utilized in v1.0).
 
-Example:
-```
-L3001
-Variable 'X' is not declared.
-Line 4, Column 10
-    lala.agar X > 10:
-              ^
-```
+## Error Categories
 
-## Inputs
-Requests from anywhere in the compiler pipeline invoking `diagnostics.error()`.
+### Lexical & Parsing (LALA1xxx)
+* `LALA1001`: Invalid syntax.
 
-## Outputs
-Error states inside `CompilerContext.diagnostics.errors`, optionally printed to `stdout`.
+### Name Resolution (LALA2xxx)
+* `LALA2001`: Undefined variable.
+* `LALA2002`: Duplicate declaration.
 
-## Ownership
-`diagnostics/reporter.py`.
+### Type System (LALA3xxx)
+* `LALA3001`: Type mismatch.
+* `LALA3002`: Invalid operation.
 
-## Invariants
-- Uses an Error Code convention (`L1xxx` for syntax/parsing, `L2xxx` for structure, `L3xxx` for semantics).
-- If errors are present, the compilation must abort before backend code generation.
+### Runtime Binding (LALA4xxx)
+* `LALA4001`: Unknown module.
+* `LALA4002`: Unknown function.
+
+### Control Flow & Warnings (LALA5xxx)
+* `LALA5001`: Unused variable.
+* `LALA5002`: Unused import.
+* `LALA5003`: Unreachable code.
+* `LALA5004`: Missing return.

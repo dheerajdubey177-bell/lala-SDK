@@ -1,0 +1,51 @@
+{
+  "module": "graphics",
+  "backend_name": "Raylib",
+  "functions": [
+    {
+      "name": "window",
+      "parameters": ["number", "number", "string"],
+      "returns": "void",
+      "pure": false,
+      "platform": "all",
+      "intrinsic": false,
+      "stable_id": "GRAPHICS_WINDOW"
+    },
+    {
+      "name": "circle",
+      "parameters": ["number", "number", "number", "number", "number", "number"],
+      "returns": "void",
+      "pure": false,
+      "platform": "all",
+      "intrinsic": false,
+      "stable_id": "GRAPHICS_CIRCLE"
+    },
+    {
+      "name": "begin_drawing",
+      "parameters": [],
+      "returns": "void",
+      "pure": false,
+      "platform": "all",
+      "intrinsic": false,
+      "stable_id": "GRAPHICS_BEGIN_DRAWING"
+    },
+    {
+      "name": "end_drawing",
+      "parameters": [],
+      "returns": "void",
+      "pure": false,
+      "platform": "all",
+      "intrinsic": false,
+      "stable_id": "GRAPHICS_END_DRAWING"
+    },
+    {
+      "name": "clear_background",
+      "parameters": ["number", "number", "number"],
+      "returns": "void",
+      "pure": false,
+      "platform": "all",
+      "intrinsic": false,
+      "stable_id": "GRAPHICS_CLEAR_BACKGROUND"
+    }
+  ]
+}

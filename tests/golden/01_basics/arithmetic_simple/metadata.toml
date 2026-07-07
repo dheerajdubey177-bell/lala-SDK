@@ -1,0 +1,4 @@
+name = "arithmetic_simple"
+architecture = "x86_64"
+optimization = "O0"
+exit_code = 8

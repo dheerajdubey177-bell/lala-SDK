@@ -1,11 +1,35 @@
-class ErrorCodes:
-    # Lexer & Parser (2000s)
-    SYNTAX_ERROR = "L2001"
-    UNEXPECTED_TOKEN = "L2002"
-    INDENTATION_ERROR = "L2003"
-    
-    # Semantics (3000s)
-    UNKNOWN_VARIABLE = "L3001"
-    UNKNOWN_FUNCTION = "L3002"
-    ALREADY_DECLARED = "L3003"
-    TYPE_MISMATCH = "L3004"
+from enum import Enum
+
+class Severity(Enum):
+    ERROR = "Error"
+    WARNING = "Warning"
+    INFO = "Info"
+
+class ErrorCode(Enum):
+    # LALA1xxx - Syntax
+    SYNTAX_ERROR = "LALA1000"
+    UNEXPECTED_TOKEN = "LALA1001"
+
+    # LALA2xxx - Semantic (Name Resolution)
+    UNDEFINED_VARIABLE = "LALA2001"
+    DUPLICATE_DECLARATION = "LALA2002"
+    UNDEFINED_FUNCTION = "LALA2003"
+    UNDEFINED_MODULE = "LALA2004"
+
+    # LALA3xxx - Type
+    TYPE_MISMATCH = "LALA3001"
+    UNDEFINED_TYPE = "LALA3002"
+    INVALID_ARGUMENTS = "LALA3003"
+
+    # LALA4xxx - Runtime Binding
+    UNKNOWN_RUNTIME_MODULE = "LALA4001"
+    UNKNOWN_RUNTIME_FUNCTION = "LALA4002"
+
+    # LALA5xxx - Warnings (CFG and Analysis)
+    UNUSED_VARIABLE = "LALA5001"
+    UNUSED_IMPORT = "LALA5002"
+    UNREACHABLE_CODE = "LALA5003"
+    MISSING_RETURN = "LALA5004"
+
+    # LALA9xxx - Internal
+    INTERNAL_COMPILER_ERROR = "LALA9999"

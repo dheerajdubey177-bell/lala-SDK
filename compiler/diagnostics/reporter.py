@@ -1,46 +1,35 @@
-class CompilerError:
-    def __init__(self, code, message, line, column, length=1, hint=None):
-        self.code = code
-        self.message = message
-        self.line = line
-        self.column = column
-        self.length = length
-        self.hint = hint
+from dataclasses import dataclass
+from compiler.ast.base import Span
+from .error_codes import ErrorCode, Severity
 
-class DiagnosticsReporter:
-    def __init__(self, context):
-        self.context = context
-        self.errors = []
-        self.warnings = []
+@dataclass
+class Diagnostic:
+    code: ErrorCode
+    severity: Severity
+    span: Span
+    message: str
+    suggestion: str | None = None
+    explanation: str | None = None
 
-    def error(self, code, message, line, column, length=1, hint=None):
-        self.errors.append(CompilerError(code, message, line, column, length, hint))
+    def __str__(self):
+        result = f"[{self.code.value}] {self.severity.value}: {self.message}\n"
+        result += f"  --> {self.span}\n"
+        if self.suggestion:
+            result += f"  Suggestion: {self.suggestion}\n"
+        if self.explanation:
+            result += f"  Explanation: {self.explanation}\n"
+        return result
 
-    def warning(self, code, message, line, column, length=1, hint=None):
-        self.warnings.append(CompilerError(code, message, line, column, length, hint))
+class DiagnosticReporter:
+    def __init__(self):
+        self.diagnostics: list[Diagnostic] = []
 
-    def has_errors(self):
-        return len(self.errors) > 0
+    def report(self, diagnostic: Diagnostic):
+        self.diagnostics.append(diagnostic)
 
-    def print_diagnostics(self):
-        if self.has_errors():
-            print(f"{len(self.errors)} errors found\n")
-            
-        lines = self.context.source_code.split('\n')
-        
-        for err in self.errors:
-            print(f"{err.code}\n")
-            print(f"{err.message}\n")
-            
-            if 0 < err.line <= len(lines):
-                source_line = lines[err.line - 1]
-                print(f"{err.line} │ {source_line}")
-                
-                # Print carets
-                padding = len(str(err.line)) + 3 + err.column
-                carets = "^" * max(1, err.length)
-                print(" " * padding + carets)
-            
-            if err.hint:
-                print(f"\n{err.hint}")
-            print("\n" + "-"*40 + "\n")
+    def has_errors(self) -> bool:
+        return any(d.severity == Severity.ERROR for d in self.diagnostics)
+
+    def print_all(self):
+        for d in self.diagnostics:
+            print(d)

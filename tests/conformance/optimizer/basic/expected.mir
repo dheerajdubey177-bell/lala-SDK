@@ -1,0 +1,11 @@
+Function main
+  Block b0
+    v0:i64 = const 70
+    store stack0:ptr, v0:i64
+    v1:i64 = load stack0:ptr
+    store stack1:ptr, v0:i64
+    jmp b2
+  Block b2
+    jmp b3
+  Block b3
+    ret

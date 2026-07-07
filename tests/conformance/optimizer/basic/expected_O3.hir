@@ -1,0 +1,13 @@
+Function main
+  Block b0
+    v0 = alloc number 'x'
+    v5 = const number 70
+    store v0, v5
+    v6 = alloc number 'y'
+    v7 = load number v0
+    store v6, v7
+    jump b2
+  Block b2
+    jump b3
+  Block b3
+    ret

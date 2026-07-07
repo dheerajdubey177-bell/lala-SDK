@@ -1,0 +1,5 @@
+lala.kaam main():
+    lala.number x = 5
+    lala.agar x > 2:
+        lala.lautao 1
+    lala.lautao 0

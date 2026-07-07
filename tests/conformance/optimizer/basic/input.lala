@@ -1,0 +1,5 @@
+kaam void main():
+    number x = 10 + 20 * 3
+    number y = x
+    agar false:
+        print(x)

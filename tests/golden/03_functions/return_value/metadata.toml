@@ -1,0 +1,4 @@
+name = "return_value"
+architecture = "x86_64"
+optimization = "O0"
+exit_code = 42

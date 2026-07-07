@@ -1,14 +1,29 @@
-# High-Level IR (HIR)
+# High-Level Intermediate Representation (HIR)
 
-## Purpose
-The HIR is an intermediate representation that sits between the AST and LIR. It is designed to capture the structural logic of Lala (e.g., control flow structures like `if` and `while`) without tying it to specific C++ syntax. 
+HIR is the canonical compiler IR. It is designed to be flat, typed, validated, and backend-independent.
 
-## Inputs
-AST stored in `CompilerContext.ast`.
+## Core Concepts
 
-## Outputs
-Control flow components translated into linear blocks.
+* **Flat Instructions**: Unlike the deeply nested AST, HIR consists of a flat list of explicit instructions.
+* **Basic Blocks**: Instructions are grouped into Basic Blocks. Every block ends with exactly one terminator (Jump, Branch, Return).
+* **Value IDs**: Variables and intermediate expressions are represented by stable `ValueID`s (e.g., `v17`).
+* **Explicit Types**: Every HIR instruction knows its exact type, eliminating the need for the backend to perform type inference.
 
-## Invariants
-- Currently merged closely with LIR in our `IRBuilderPass`, but architecturally represents the structural translation boundary.
-- Designed to remain platform-independent.
+## Instruction Set
+
+* `Load` / `Store` / `Move`
+* `Call` (User-defined functions)
+* `RuntimeCall` (e.g., `GRAPHICS_CIRCLE`)
+* `IntrinsicCall` (e.g., `INTRINSIC_PRINT`)
+* `Compare`
+* `Branch` / `Jump` / `Return`
+* `Allocate`
+* `Constant`
+
+## Validation
+
+All HIR must pass the Validation pass, ensuring:
+1. Terminator integrity.
+2. Valid jump targets.
+3. Defined `ValueID` usage.
+4. Valid intrinsic and runtime IDs.

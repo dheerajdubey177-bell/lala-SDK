@@ -1,0 +1,4 @@
+lala.kaam main():
+    lala.number x = 5
+    lala.number y = 3
+    lala.lautao x + y

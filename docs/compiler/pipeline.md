@@ -1,19 +1,18 @@
-# Compiler Pipeline
+# Lala Compiler Pipeline
 
-## Purpose
-The Pipeline dictates how Lala source code transitions into compiled executables. It organizes discrete, decoupled passes into a unified compilation process.
+The Lala compiler is organized into a series of distinct stages. This ensures decoupling between syntax parsing, semantic analysis, and backend code generation.
 
-## Architecture
-The compiler follows a `PassManager` design pattern, heavily relying on a central `CompilerContext`.
+## Stages
 
-```text
-Source -> Lexer -> Parser -> AST -> Semantic Passes -> HIR -> Optimizer -> LIR -> Backend -> C++
-```
-
-## Ownership
-The `lala_compiler.py` driver owns the `PassManager` configuration. Individual modules do NOT invoke each other; instead, they operate exclusively on the `CompilerContext`.
-
-## Invariants
-- Each pass must implement the `CompilerPass` interface.
-- Passes must NOT destructively modify the AST. They should append data to the Context (e.g., Symbol Tables, IR graphs).
-- If `DiagnosticsReporter` registers an error (e.g., `has_errors()`), the pipeline halts before reaching the Backend to prevent invalid C++ generation.
+1. **Lexer**: Converts raw source text into a stream of `Token`s.
+2. **Parser**: Consumes tokens and builds the immutable Abstract Syntax Tree (`AST`).
+3. **Semantic Pipeline**:
+    * **Name Resolution**: Binds identifiers to `Symbol`s in hierarchical `Scope`s.
+    * **Type Resolution**: Maps AST type annotations to canonical `Type` objects.
+    * **Type Checker**: Enforces type invariants and reports semantic errors (e.g., LALA3xxx).
+4. **Bound AST Generation**: Collapses the side-tables (Context) into a strictly-typed `BoundNode` tree.
+5. **Control Flow Analysis (CFA)**: Analyzes the `Bound AST` for reachability and missing returns.
+6. **High-Level Intermediate Representation (HIR)**: Lowers the `Bound AST` into a flat, block-based, SSA-ready instruction set. The compiler's canonical "source of truth".
+7. **HIR Optimization**: (Optional in v1.0) Constant folding, dead code elimination.
+8. **Machine Intermediate Representation (MIR)**: Lowers HIR into machine-oriented types (`i32`, `f64`).
+9. **Backend**: Translates MIR to the final target (e.g., C++, LLVM, WASM).

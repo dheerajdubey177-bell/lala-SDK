@@ -1,0 +1,44 @@
+{
+  "name": "lala-lang",
+  "displayName": "Lala Language",
+  "description": "Official Lala SDK support including LSP, Semantic Highlighting, and Snippets",
+  "version": "0.1.0",
+  "publisher": "lala-dev",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Themes",
+    "Formatters"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "lala",
+        "aliases": ["Lala", "lala"],
+        "extensions": [".lala"]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "lala",
+        "path": "./snippets/lala.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Lala Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/lala-dark.json"
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  }
+}

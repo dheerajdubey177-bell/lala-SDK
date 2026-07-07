@@ -1,0 +1,25 @@
+Program
+    Function(main)
+        VariableDecl
+            number
+            count
+            NumberLiteral(0)
+        While
+            BinaryExpression
+                LT
+                Identifier(count)
+                NumberLiteral(10)
+            AssignmentExpression
+                Identifier(count)
+                BinaryExpression
+                    ADD
+                    Identifier(count)
+                    NumberLiteral(1)
+            If
+                BinaryExpression
+                    EQ
+                    Identifier(count)
+                    NumberLiteral(5)
+                Break
+        Return
+            Identifier(count)

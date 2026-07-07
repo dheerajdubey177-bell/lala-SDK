@@ -1,5 +1,8 @@
-# Lala SDK
+# Lala SDK 🚀
 
+> **Made by Dheeraj Dubey**
+
+Welcome to the official Lala SDK repository! This documentation serves as the master guide for everybody to follow.
 Lala SDK is a powerful, highly optimized programming language and compiler that lets you write code in an intuitive, Python-like Hinglish syntax and instantly compiles it into native C++ Windows executables. It comes bundled with AAA game engine capabilities powered by Raylib!
 
 ## Features
