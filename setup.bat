@@ -10,9 +10,16 @@ set INSTALL_DIR=%USERPROFILE%\lala-sdk
 echo [1/4] Preparing Installation Directory: %INSTALL_DIR%
 if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
 
-:: 2. Build the SDK to ensure latest compiler is ready
-echo [2/4] Building Lala Compiler...
-call build_sdk.bat >nul 2>&1
+:: 2. Check if the SDK is pre-compiled (Layman check)
+echo [2/4] Checking for pre-compiled Lala Engine...
+if not exist "bin\lala.exe" (
+    echo.
+    echo ERROR: Could not find 'bin\lala.exe'. 
+    echo Please make sure you downloaded the pre-compiled Release version,
+    echo or run 'build_sdk.bat' first if you are a developer!
+    pause
+    exit /b
+)
 
 :: 3. Copy essential files to the installation directory
 echo [3/4] Copying core SDK files...
